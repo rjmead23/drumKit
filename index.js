@@ -5,10 +5,10 @@ var numberOfButtons = document.querySelectorAll(".drum").length;
 
 for (var i = 0; i < numberOfButtons; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function(){
-
     var buttonInnerHTML = this.innerHTML;
 
     makeSound(buttonInnerHTML);
+    buttonAnimation(buttonInnerHTML);
 
   });
 }
@@ -16,6 +16,7 @@ for (var i = 0; i < numberOfButtons; i++) {
 // Detecting keydown
 document.addEventListener("keydown", function(event){
   makeSound(event.key);
+  buttonAnimation(event.key);
 });
 
 function makeSound(key){
@@ -57,4 +58,14 @@ function makeSound(key){
 
     default: console.log("Key detected that doesn't have a sound: " + key);
   }
+}
+
+function buttonAnimation(currentKey){
+
+  var activeButon = document.querySelector("." + currentKey);
+  activeButon.classList.add("pressed");
+
+  setTimeout(function(){
+    activeButon.classList.remove("pressed");
+  }, 100);
 }
